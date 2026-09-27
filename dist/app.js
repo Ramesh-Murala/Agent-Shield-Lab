@@ -24,10 +24,10 @@ function render() {
   const elapsed = Math.max(1, Math.round(performance.now() - started));
   const { score, level, findings, policy, truncated } = latestResult;
   const meta = {
-    critical: ['Critical injection', 'Multiple high-impact signals could redirect the agent or expose protected context.', '#ff4f7b'],
-    high: ['High risk', 'The content contains instructions that should not enter a privileged agent context.', '#ff7048'],
-    caution: ['Review advised', 'Suspicious language was found. Limit tool access and verify the source.', '#ffb84a'],
-    low: ['Low risk', 'No strong prompt-injection patterns were detected in this content.', '#c9ff4a']
+    critical: ['Critical injection', 'Multiple signals may indicate an attempt to redirect the agent or expose private context.', '#b42345'],
+    high: ['High risk', 'The text includes instructions that call for review before an agent uses it.', '#bc4636'],
+    caution: ['Review advised', 'A rule matched this content. Verify the source and keep tool permissions restricted.', '#a36400'],
+    low: ['No rule matched', 'No rule matched this content. A missed attack is still possible.', '#258063']
   }[level];
   $('score').textContent = score;
   $('score-ring').style.setProperty('--score-angle', `${score * 3.6}deg`);
