@@ -1,5 +1,5 @@
 {
-  "method": "Hand-labeled synthetic examples; threshold score >= 20. Development examples were used to adjust rules. Holdout examples were evaluated after the rule changes. Neither set is a real-world or adversarial robustness estimate.",
+  "method": "Hand-labeled synthetic examples; threshold score >= 20. Development cases informed the rules; holdout cases were run after the changes. Neither set measures real-world robustness.",
   "development": {
     "name": "development",
     "sample_size": 36,
@@ -8,7 +8,7 @@
     "true_negative": 15,
     "false_negative": 0,
     "precision": 0.857,
-    "recall": 1,
+    "recall": 1.0,
     "specificity": 0.833,
     "cases": [
       {

@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="AgentShield Lab explores explainable prompt-injection signals with a Python scanner.">
+  <meta name="theme-color" content="#f5f5f7">
+  <title>{{PAGE_TITLE}}</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%230075e8'/%3E%3Cpath d='M32 11 49 18v12c0 11-6 18-17 23-11-5-17-12-17-23V18z' fill='none' stroke='white' stroke-width='4'/%3E%3Cpath d='m25 32 5 5 10-12' fill='none' stroke='white' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/"><span class="brand-mark" aria-hidden="true">AS</span> AgentShield Lab</a>
+    <div class="top-meta"><span class="status-dot"></span>{{NOTICE}}</div>
+    <a class="github-link" href="https://github.com/Ramesh-Murala/Agent-Shield-Lab">Source on GitHub ↗</a>
+  </header>
+  <main>
+    <section class="intro" aria-labelledby="page-title">
+      <p class="eyebrow">AGENT SECURITY, MADE CLEAR</p>
+      <h1 id="page-title">Spot risky instructions.<br><span>See exactly why.</span></h1>
+      <p class="intro-copy">{{INTRO}}</p>
+    </section>
+    <section class="workspace" aria-label="Prompt injection scanner">
+      {{FORM_OPEN}}
+        <div class="panel-head"><div><span class="step">01</span><h2>Untrusted content</h2></div><span class="mono">{{COUNT}}</span></div>
+        <div class="sample-row"><span>Try an example:</span>{{LINKS}}</div>
+        {{INPUT}}
+        <div class="input-foot"><span>Heuristic scanner · 20,000 character scan limit</span>{{ACTION}}</div>
+      {{FORM_CLOSE}}
+      <section class="panel result-panel" aria-label="Threat map">
+        <div class="panel-head"><div><span class="step">02</span><h2>Threat map</h2></div><span class="mono">RULE SCORE</span></div>
+        <div class="score-zone"><div class="score-ring" style="--score-angle:{{ANGLE}}deg;color:{{COLOR}}"><span>{{SCORE}}</span><small>/100</small></div>
+          <div class="verdict"><p class="eyebrow">RISK VERDICT</p><h3 style="color:{{COLOR}}">{{VERDICT}}</h3><p>{{VERDICT_COPY}}</p></div></div>
+        <div class="signals">{{SIGNALS}}</div>
+      </section>
+    </section>
+    <section class="report" aria-label="Scan report">
+      <div class="report-head"><div><span class="step">03</span><h2>Agent-safe handling plan</h2></div><span class="mono">ADVISORY, NOT AUTOMATIC</span></div>
+      <div class="report-grid">
+        <div class="evidence-card"><p class="eyebrow">EVIDENCE VIEW</p><div class="evidence">{{EVIDENCE}}</div></div>
+        <div class="policy-card"><p class="eyebrow">RECOMMENDED GUARDRAILS</p><ol>{{POLICY}}</ol>
+          <div class="policy-code"><code>decision: {{DECISION}}
+tool_access: least_privilege
+secret_access: denied_by_default</code></div></div>
+      </div>
+    </section>
+    <section class="how-it-works" aria-label="How it works">
+      <div class="section-label"><span>How it works</span><span>REPRODUCIBLE PYTHON EVALUATION</span></div>
+      <div class="method-grid">
+        <article><span class="method-num">A</span><h3>Signal extraction</h3><p>Normalizes text and checks six explainable rule families.</p></article>
+        <article><span class="method-num">B</span><h3>Rule score</h3><p>Weights matched signals. The number is a heuristic, not an attack probability.</p></article>
+        <article><span class="method-num">C</span><h3>Handling suggestions</h3><p>A Python integration gate can withhold matched or truncated text. Independent permissions remain essential.</p></article>
+      </div>
+      <p>On 20 held-out synthetic examples, the scanner flagged <strong>6 of 10 attacks</strong> and <strong>3 of 10 harmless cases</strong>. <a href="https://github.com/Ramesh-Murala/Agent-Shield-Lab/blob/main/evaluation/results.json">See every result and limitation</a>.</p>
+    </section>
+  </main>
+  <footer><span>AgentShield Lab · MIT License</span><span>Open-source Python project by Ramesh Murala.</span></footer>
+</body>
+</html>
