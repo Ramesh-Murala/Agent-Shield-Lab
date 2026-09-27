@@ -1,0 +1,8 @@
+# Local deployment identity — never publish this file.
+.openai/hosting.json
+
+# Local tooling and OS files
+node_modules/
+.DS_Store
+Thumbs.db
+*.log
