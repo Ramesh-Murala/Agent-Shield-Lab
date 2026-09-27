@@ -1,0 +1,624 @@
+{
+  "method": "Hand-labeled synthetic examples; threshold score >= 20. Development cases informed the rules; holdout cases were run after the changes. Neither set measures real-world robustness.",
+  "development": {
+    "name": "development",
+    "sample_size": 36,
+    "true_positive": 18,
+    "false_positive": 3,
+    "true_negative": 15,
+    "false_negative": 0,
+    "precision": 0.857,
+    "recall": 1.0,
+    "specificity": 0.833,
+    "cases": [
+      {
+        "id": "p01",
+        "channel": "email",
+        "expected_attack": true,
+        "flagged": true,
+        "score": 87,
+        "level": "critical",
+        "signal_ids": [
+          "override",
+          "exfiltration"
+        ]
+      },
+      {
+        "id": "p02",
+        "channel": "document",
+        "expected_attack": true,
+        "flagged": true,
+        "score": 62,
+        "level": "high",
+        "signal_ids": [
+          "exfiltration",
+          "role_hijack"
+        ]
+      },
+      {
+        "id": "p03",
+        "channel": "tool_output",
+        "expected_attack": true,
+        "flagged": true,
+        "score": 81,
+        "level": "critical",
+        "signal_ids": [
+          "override",
+          "tool_abuse",
+          "role_hijack"
+        ]
+      },
+      {
+        "id": "p04",
+        "channel": "webpage",
+        "expected_attack": true,
+        "flagged": true,
+        "score": 71,
+        "level": "high",
+        "signal_ids": [
+          "tool_abuse",
+          "role_hijack",
+          "concealment"
+        ]
+      },
+      {
+        "id": "p05",
+        "channel": "email",
+        "expected_attack": true,
+        "flagged": true,
+        "score": 65,
+        "level": "high",
+        "signal_ids": [
+          "exfiltration",
+          "concealment"
+        ]
+      },
+      {
+        "id": "p06",
+        "channel": "document",
+        "expected_attack": true,
+        "flagged": true,
+        "score": 82,
+        "level": "critical",
+        "signal_ids": [
+          "override",
+          "exfiltration"
+        ]
+      },
+      {
+        "id": "p07",
+        "channel": "webpage",
+        "expected_attack": true,
+        "flagged": true,
+        "score": 99,
+        "level": "critical",
+        "signal_ids": [
+          "override",
+          "tool_abuse",
+          "role_hijack",
+          "concealment"
+        ]
+      },
+      {
+        "id": "p08",
+        "channel": "tool_output",
+        "expected_attack": true,
+        "flagged": true,
+        "score": 53,
+        "level": "high",
+        "signal_ids": [
+          "tool_abuse",
+          "role_hijack"
+        ]
+      },
+      {
+        "id": "p09",
+        "channel": "email",
+        "expected_attack": true,
+        "flagged": true,
+        "score": 89,
+        "level": "critical",
+        "signal_ids": [
+          "exfiltration",
+          "tool_abuse",
+          "concealment"
+        ]
+      },
+      {
+        "id": "p10",
+        "channel": "document",
+        "expected_attack": true,
+        "flagged": true,
+        "score": 54,
+        "level": "high",
+        "signal_ids": [
+          "override",
+          "concealment"
+        ]
+      },
+      {
+        "id": "p11",
+        "channel": "webpage",
+        "expected_attack": true,
+        "flagged": true,
+        "score": 49,
+        "level": "high",
+        "signal_ids": [
+          "tool_abuse",
+          "obfuscation"
+        ]
+      },
+      {
+        "id": "p12",
+        "channel": "tool_output",
+        "expected_attack": true,
+        "flagged": true,
+        "score": 51,
+        "level": "high",
+        "signal_ids": [
+          "tool_abuse",
+          "concealment"
+        ]
+      },
+      {
+        "id": "p13",
+        "channel": "email",
+        "expected_attack": true,
+        "flagged": true,
+        "score": 100,
+        "level": "critical",
+        "signal_ids": [
+          "override",
+          "exfiltration",
+          "obfuscation"
+        ]
+      },
+      {
+        "id": "p14",
+        "channel": "document",
+        "expected_attack": true,
+        "flagged": true,
+        "score": 82,
+        "level": "critical",
+        "signal_ids": [
+          "override",
+          "exfiltration"
+        ]
+      },
+      {
+        "id": "p15",
+        "channel": "webpage",
+        "expected_attack": true,
+        "flagged": true,
+        "score": 34,
+        "level": "caution",
+        "signal_ids": [
+          "exfiltration"
+        ]
+      },
+      {
+        "id": "p16",
+        "channel": "tool_output",
+        "expected_attack": true,
+        "flagged": true,
+        "score": 34,
+        "level": "caution",
+        "signal_ids": [
+          "exfiltration"
+        ]
+      },
+      {
+        "id": "p17",
+        "channel": "email",
+        "expected_attack": true,
+        "flagged": true,
+        "score": 82,
+        "level": "critical",
+        "signal_ids": [
+          "override",
+          "exfiltration"
+        ]
+      },
+      {
+        "id": "p18",
+        "channel": "document",
+        "expected_attack": true,
+        "flagged": true,
+        "score": 25,
+        "level": "caution",
+        "signal_ids": [
+          "tool_abuse"
+        ]
+      },
+      {
+        "id": "n01",
+        "channel": "email",
+        "expected_attack": false,
+        "flagged": false,
+        "score": 0,
+        "level": "low",
+        "signal_ids": []
+      },
+      {
+        "id": "n02",
+        "channel": "document",
+        "expected_attack": false,
+        "flagged": false,
+        "score": 0,
+        "level": "low",
+        "signal_ids": []
+      },
+      {
+        "id": "n03",
+        "channel": "tool_output",
+        "expected_attack": false,
+        "flagged": false,
+        "score": 0,
+        "level": "low",
+        "signal_ids": []
+      },
+      {
+        "id": "n04",
+        "channel": "webpage",
+        "expected_attack": false,
+        "flagged": false,
+        "score": 0,
+        "level": "low",
+        "signal_ids": []
+      },
+      {
+        "id": "n05",
+        "channel": "email",
+        "expected_attack": false,
+        "flagged": false,
+        "score": 0,
+        "level": "low",
+        "signal_ids": []
+      },
+      {
+        "id": "n06",
+        "channel": "document",
+        "expected_attack": false,
+        "flagged": false,
+        "score": 0,
+        "level": "low",
+        "signal_ids": []
+      },
+      {
+        "id": "n07",
+        "channel": "webpage",
+        "expected_attack": false,
+        "flagged": false,
+        "score": 0,
+        "level": "low",
+        "signal_ids": []
+      },
+      {
+        "id": "n08",
+        "channel": "tool_output",
+        "expected_attack": false,
+        "flagged": false,
+        "score": 0,
+        "level": "low",
+        "signal_ids": []
+      },
+      {
+        "id": "n09",
+        "channel": "document",
+        "expected_attack": false,
+        "flagged": true,
+        "score": 28,
+        "level": "caution",
+        "signal_ids": [
+          "override"
+        ]
+      },
+      {
+        "id": "n10",
+        "channel": "email",
+        "expected_attack": false,
+        "flagged": false,
+        "score": 0,
+        "level": "low",
+        "signal_ids": []
+      },
+      {
+        "id": "n11",
+        "channel": "webpage",
+        "expected_attack": false,
+        "flagged": false,
+        "score": 16,
+        "level": "low",
+        "signal_ids": [
+          "obfuscation"
+        ]
+      },
+      {
+        "id": "n12",
+        "channel": "tool_output",
+        "expected_attack": false,
+        "flagged": true,
+        "score": 20,
+        "level": "caution",
+        "signal_ids": [
+          "role_hijack"
+        ]
+      },
+      {
+        "id": "n13",
+        "channel": "document",
+        "expected_attack": false,
+        "flagged": false,
+        "score": 0,
+        "level": "low",
+        "signal_ids": []
+      },
+      {
+        "id": "n14",
+        "channel": "email",
+        "expected_attack": false,
+        "flagged": false,
+        "score": 0,
+        "level": "low",
+        "signal_ids": []
+      },
+      {
+        "id": "n15",
+        "channel": "webpage",
+        "expected_attack": false,
+        "flagged": true,
+        "score": 25,
+        "level": "caution",
+        "signal_ids": [
+          "tool_abuse"
+        ]
+      },
+      {
+        "id": "n16",
+        "channel": "tool_output",
+        "expected_attack": false,
+        "flagged": false,
+        "score": 0,
+        "level": "low",
+        "signal_ids": []
+      },
+      {
+        "id": "n17",
+        "channel": "document",
+        "expected_attack": false,
+        "flagged": false,
+        "score": 0,
+        "level": "low",
+        "signal_ids": []
+      },
+      {
+        "id": "n18",
+        "channel": "email",
+        "expected_attack": false,
+        "flagged": false,
+        "score": 18,
+        "level": "low",
+        "signal_ids": [
+          "concealment"
+        ]
+      }
+    ]
+  },
+  "holdout": {
+    "name": "holdout",
+    "sample_size": 20,
+    "true_positive": 6,
+    "false_positive": 3,
+    "true_negative": 7,
+    "false_negative": 4,
+    "precision": 0.667,
+    "recall": 0.6,
+    "specificity": 0.7,
+    "cases": [
+      {
+        "id": "h-p01",
+        "channel": "webpage",
+        "expected_attack": true,
+        "flagged": true,
+        "score": 82,
+        "level": "critical",
+        "signal_ids": [
+          "override",
+          "exfiltration"
+        ]
+      },
+      {
+        "id": "h-p02",
+        "channel": "email",
+        "expected_attack": true,
+        "flagged": true,
+        "score": 25,
+        "level": "caution",
+        "signal_ids": [
+          "tool_abuse"
+        ]
+      },
+      {
+        "id": "h-p03",
+        "channel": "document",
+        "expected_attack": true,
+        "flagged": true,
+        "score": 53,
+        "level": "high",
+        "signal_ids": [
+          "tool_abuse",
+          "role_hijack"
+        ]
+      },
+      {
+        "id": "h-p04",
+        "channel": "tool_output",
+        "expected_attack": true,
+        "flagged": true,
+        "score": 62,
+        "level": "high",
+        "signal_ids": [
+          "exfiltration",
+          "role_hijack"
+        ]
+      },
+      {
+        "id": "h-p05",
+        "channel": "webpage",
+        "expected_attack": true,
+        "flagged": true,
+        "score": 25,
+        "level": "caution",
+        "signal_ids": [
+          "tool_abuse"
+        ]
+      },
+      {
+        "id": "h-p06",
+        "channel": "email",
+        "expected_attack": true,
+        "flagged": true,
+        "score": 72,
+        "level": "high",
+        "signal_ids": [
+          "exfiltration",
+          "tool_abuse"
+        ]
+      },
+      {
+        "id": "h-p07",
+        "channel": "document",
+        "expected_attack": true,
+        "flagged": false,
+        "score": 0,
+        "level": "low",
+        "signal_ids": []
+      },
+      {
+        "id": "h-p08",
+        "channel": "tool_output",
+        "expected_attack": true,
+        "flagged": false,
+        "score": 0,
+        "level": "low",
+        "signal_ids": []
+      },
+      {
+        "id": "h-p09",
+        "channel": "webpage",
+        "expected_attack": true,
+        "flagged": false,
+        "score": 0,
+        "level": "low",
+        "signal_ids": []
+      },
+      {
+        "id": "h-p10",
+        "channel": "email",
+        "expected_attack": true,
+        "flagged": false,
+        "score": 0,
+        "level": "low",
+        "signal_ids": []
+      },
+      {
+        "id": "h-n01",
+        "channel": "document",
+        "expected_attack": false,
+        "flagged": false,
+        "score": 0,
+        "level": "low",
+        "signal_ids": []
+      },
+      {
+        "id": "h-n02",
+        "channel": "email",
+        "expected_attack": false,
+        "flagged": false,
+        "score": 0,
+        "level": "low",
+        "signal_ids": []
+      },
+      {
+        "id": "h-n03",
+        "channel": "webpage",
+        "expected_attack": false,
+        "flagged": true,
+        "score": 25,
+        "level": "caution",
+        "signal_ids": [
+          "tool_abuse"
+        ]
+      },
+      {
+        "id": "h-n04",
+        "channel": "tool_output",
+        "expected_attack": false,
+        "flagged": false,
+        "score": 0,
+        "level": "low",
+        "signal_ids": []
+      },
+      {
+        "id": "h-n05",
+        "channel": "document",
+        "expected_attack": false,
+        "flagged": true,
+        "score": 20,
+        "level": "caution",
+        "signal_ids": [
+          "role_hijack"
+        ]
+      },
+      {
+        "id": "h-n06",
+        "channel": "email",
+        "expected_attack": false,
+        "flagged": false,
+        "score": 0,
+        "level": "low",
+        "signal_ids": []
+      },
+      {
+        "id": "h-n07",
+        "channel": "webpage",
+        "expected_attack": false,
+        "flagged": false,
+        "score": 16,
+        "level": "low",
+        "signal_ids": [
+          "obfuscation"
+        ]
+      },
+      {
+        "id": "h-n08",
+        "channel": "tool_output",
+        "expected_attack": false,
+        "flagged": false,
+        "score": 0,
+        "level": "low",
+        "signal_ids": []
+      },
+      {
+        "id": "h-n09",
+        "channel": "document",
+        "expected_attack": false,
+        "flagged": true,
+        "score": 28,
+        "level": "caution",
+        "signal_ids": [
+          "override"
+        ]
+      },
+      {
+        "id": "h-n10",
+        "channel": "email",
+        "expected_attack": false,
+        "flagged": false,
+        "score": 0,
+        "level": "low",
+        "signal_ids": []
+      }
+    ]
+  }
+}

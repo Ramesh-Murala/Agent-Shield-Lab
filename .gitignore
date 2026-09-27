@@ -1,0 +1,12 @@
+# Local deployment identity — never publish this file.
+.openai/hosting.json
+
+# Local tooling and OS files
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.DS_Store
+Thumbs.db
+*.log
