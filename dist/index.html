@@ -4,29 +4,28 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Explore explainable prompt-injection signals, measured trade-offs, and an advisory handling plan in a private browser demo." />
-  <meta name="theme-color" content="#090b10" />
+  <meta name="theme-color" content="#f5f5f7" />
   <title>AgentShield Lab — Prompt Injection Scanner</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath fill='%23c9ff4a' d='M32 4 55 13v17c0 15-9 25-23 30C18 55 9 45 9 30V13z'/%3E%3Cpath fill='%23090b10' d='M32 13 46 18v12c0 9-5 15-14 19-9-4-14-10-14-19V18z'/%3E%3Cpath fill='%23c9ff4a' d='M29 20h6v18h-6zm0 22h6v6h-6z'/%3E%3C/svg%3E" />
-  <link rel="stylesheet" href="./style.css" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%230075e8'/%3E%3Cpath d='M32 11 49 18v12c0 11-6 18-17 23-11-5-17-12-17-23V18z' fill='none' stroke='white' stroke-width='4'/%3E%3Cpath d='m25 32 5 5 10-12' fill='none' stroke='white' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="./apple.css" />
 </head>
 <body>
-  <div class="noise" aria-hidden="true"></div>
   <header class="topbar">
     <a class="brand" href="#" aria-label="AgentShield Lab home">
       <span class="brand-mark" aria-hidden="true">AS</span>
       <span>AgentShield <b>Lab</b></span>
     </a>
-    <div class="top-meta"><span class="status-dot"></span> Local engine <span class="divider">/</span> No data leaves this tab</div>
+    <div class="top-meta"><span class="status-dot"></span> Runs in your browser <span class="divider">·</span> Private by default</div>
     <a class="github-link" href="https://github.com/Ramesh-Murala/Agent-Shield-Lab">Source on GitHub <span>↗</span></a>
   </header>
 
   <main>
     <section class="intro" aria-labelledby="page-title">
       <div>
-        <p class="eyebrow">OPEN-SOURCE AGENT SECURITY / 001</p>
-        <h1 id="page-title">See the attack<br><span>before your agent does.</span></h1>
+        <p class="eyebrow">AGENT SECURITY, MADE CLEAR</p>
+        <h1 id="page-title">Spot risky instructions.<br><span>See exactly why.</span></h1>
       </div>
-      <p class="intro-copy">Paste any email, webpage, tool output, or retrieved document. AgentShield maps hidden instructions, exfiltration attempts, and unsafe tool requests—entirely in your browser.</p>
+      <p class="intro-copy">Paste an email, document, or tool result. Get a clear view of the rules it matches and an advisory handling plan. Your text stays in this browser.</p>
     </section>
 
     <section class="workspace" aria-label="Prompt injection scanner">
@@ -73,7 +72,7 @@
     <section id="report" class="report hidden" aria-label="Scan report">
       <div class="report-head">
         <div><span class="step">03</span><h2>Agent-safe handling plan</h2></div>
-        <button id="copy-button" class="copy-button">Copy advisory plan</button>
+        <button id="copy-button" class="copy-button">Copy plan</button>
       </div>
       <div class="report-grid">
         <div class="evidence-card">
@@ -95,11 +94,11 @@
         <article><span class="method-num">B</span><h3>Rule score</h3><p>A transparent weighted heuristic combines matched signals. The number is not an attack probability or a calibrated confidence estimate.</p></article>
         <article><span class="method-num">C</span><h3>Handling suggestions</h3><p>Produces a suggested plan. This page does not intercept agent tools or enforce access controls.</p></article>
       </div>
-      <p style="max-width:860px;color:#a9b2b8;font-size:13px;margin-top:28px">Evaluation: 36 development examples and <strong>20 holdout examples: 6/10 attacks detected, 3/10 harmless cases flagged</strong>. Read the <a href="https://github.com/Ramesh-Murala/Agent-Shield-Lab/blob/main/evaluation/results.json">confusion matrix and misses</a>. Synthetic examples cannot establish real-world security. Keep tool permissions independent of this score.</p>
+      <p>Evaluation: 36 development examples and <strong>20 holdout examples: 6/10 attacks detected, 3/10 harmless cases flagged</strong>. Read the <a href="https://github.com/Ramesh-Murala/Agent-Shield-Lab/blob/main/evaluation/results.json">confusion matrix and misses</a>. Synthetic examples cannot establish real-world security. Keep tool permissions independent of this score.</p>
     </section>
   </main>
 
-  <footer><span>AGENTSHIELD LAB / MIT LICENSE</span><span>Built for the agentic web.</span></footer>
+  <footer><span>AgentShield Lab · MIT License</span><span>A measured, open-source demo by Ramesh Murala.</span></footer>
   <div id="toast" class="toast" role="status">Policy copied</div>
   <script type="module" src="./app.js"></script>
 </body>
