@@ -27,3 +27,11 @@ def test_html_is_escaped():
     assert response.status_code == 200
     assert "&lt;b&gt;" in response.text
     assert "<b>unsafe</b>" not in response.text
+
+
+def test_malformed_utf8_form_data_returns_client_error():
+    for body in (b"text=\xff", b"text=%FF"):
+        response = client.post("/scan", content=body,
+                               headers={"content-type": "application/x-www-form-urlencoded"})
+        assert response.status_code == 400
+        assert "valid UTF-8" in response.text
