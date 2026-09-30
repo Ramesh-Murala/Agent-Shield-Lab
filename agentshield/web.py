@@ -106,7 +106,11 @@ async def scan_form(request: Request) -> str:
     body = await request.body()
     if len(body) > 400_000:
         raise HTTPException(status_code=413, detail="Request is too large")
-    data = parse_qs(body.decode("utf-8"), keep_blank_values=True)
+    try:
+        data = parse_qs(body.decode("utf-8"), keep_blank_values=True,
+                        encoding="utf-8", errors="strict")
+    except UnicodeDecodeError as exc:
+        raise HTTPException(status_code=400, detail="Form data must be valid UTF-8") from exc
     text = data.get("text", [""])[0]
     if not text or len(text) > 100_000:
         raise HTTPException(status_code=422, detail="Text must be between 1 and 100,000 characters")
