@@ -9,7 +9,9 @@ from dataclasses import dataclass
 from typing import Any
 
 LIMIT = 20_000
-INVISIBLE = "\u200b\u200c\u200d\ufeff"
+# Zero-width and bidirectional formatting controls can make displayed text
+# differ from the sequence inspected by a person or a simple regex scanner.
+HIDDEN_CONTROLS = "\u061c\u200b\u200c\u200d\u200e\u200f\u202a\u202b\u202c\u202d\u202e\u2066\u2067\u2068\u2069\ufeff"
 
 
 @dataclass(frozen=True)
@@ -56,7 +58,7 @@ RULES = (
 def _normalized_with_offsets(text: str) -> tuple[str, list[int]]:
     chars, offsets = [], []
     for index, char in enumerate(text):
-        if char in INVISIBLE:
+        if char in HIDDEN_CONTROLS:
             continue
         for normalized_char in unicodedata.normalize("NFKC", char):
             chars.append(normalized_char)
@@ -98,17 +100,17 @@ def scan_text(raw_text: str) -> dict[str, Any]:
         if matches:
             findings.append({"id": rule.id, "label": rule.label, "severity": rule.severity,
                              "detail": rule.detail, "matches": list(dict.fromkeys(matches))[:4], "count": len(matches)})
-    invisible_matches = list(re.finditer(f"[{INVISIBLE}]+", text))
-    if invisible_matches:
-        ranges.extend({"start": match.start(), "end": match.end()} for match in invisible_matches)
+    hidden_matches = list(re.finditer(f"[{HIDDEN_CONTROLS}]+", text))
+    if hidden_matches:
+        ranges.extend({"start": match.start(), "end": match.end()} for match in hidden_matches)
         found = next((item for item in findings if item["id"] == "obfuscation"), None)
         if found:
-            found["count"] += len(invisible_matches)
+            found["count"] += len(hidden_matches)
         else:
             rule = RULES[-1]
             findings.append({"id": rule.id, "label": rule.label, "severity": rule.severity,
-                             "detail": rule.detail, "matches": ["invisible Unicode characters"],
-                             "count": len(invisible_matches)})
+                             "detail": rule.detail, "matches": ["hidden Unicode controls"],
+                             "count": len(hidden_matches)})
     score = sum(item["severity"] * (1 + min(item["count"] - 1, 2) * 0.16) for item in findings)
     if len(findings) >= 2:
         score += 8
