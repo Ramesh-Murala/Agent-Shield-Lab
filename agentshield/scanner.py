@@ -61,6 +61,13 @@ def _normalized_with_offsets(text: str) -> tuple[str, list[int]]:
         if char in HIDDEN_CONTROLS:
             continue
         for normalized_char in unicodedata.normalize("NFKC", char):
+            # Rules describe tokens, not a particular document layout. Treat
+            # tabs, newlines, and repeated whitespace as a single separator so
+            # formatting cannot split an otherwise identical attack phrase.
+            if normalized_char.isspace():
+                normalized_char = " "
+                if chars and chars[-1] == " ":
+                    continue
             chars.append(normalized_char)
             offsets.append(index)
     return "".join(chars), offsets
