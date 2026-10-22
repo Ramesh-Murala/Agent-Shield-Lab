@@ -9,9 +9,16 @@ from dataclasses import dataclass
 from typing import Any
 
 LIMIT = 20_000
-# Zero-width and bidirectional formatting controls can make displayed text
-# differ from the sequence inspected by a person or a simple regex scanner.
-HIDDEN_CONTROLS = "\u061c\u200b\u200c\u200d\u200e\u200f\u202a\u202b\u202c\u202d\u202e\u2066\u2067\u2068\u2069\ufeff"
+
+
+def _is_hidden_control(char: str) -> bool:
+    """Return whether *char* is an invisible Unicode format control.
+
+    Unicode's ``Cf`` category includes zero-width, bidirectional, joining, and
+    soft-hyphen controls. Checking the category avoids a brittle allowlist that
+    can miss less common controls such as WORD JOINER (U+2060).
+    """
+    return unicodedata.category(char) == "Cf"
 
 
 @dataclass(frozen=True)
@@ -58,7 +65,7 @@ RULES = (
 def _normalized_with_offsets(text: str) -> tuple[str, list[int]]:
     chars, offsets = [], []
     for index, char in enumerate(text):
-        if char in HIDDEN_CONTROLS:
+        if _is_hidden_control(char):
             continue
         for normalized_char in unicodedata.normalize("NFKC", char):
             # Rules describe tokens, not a particular document layout. Treat
@@ -107,17 +114,24 @@ def scan_text(raw_text: str) -> dict[str, Any]:
         if matches:
             findings.append({"id": rule.id, "label": rule.label, "severity": rule.severity,
                              "detail": rule.detail, "matches": list(dict.fromkeys(matches))[:4], "count": len(matches)})
-    hidden_matches = list(re.finditer(f"[{HIDDEN_CONTROLS}]+", text))
-    if hidden_matches:
-        ranges.extend({"start": match.start(), "end": match.end()} for match in hidden_matches)
+    hidden_ranges = []
+    for index, char in enumerate(text):
+        if not _is_hidden_control(char):
+            continue
+        if hidden_ranges and hidden_ranges[-1]["end"] == index:
+            hidden_ranges[-1]["end"] = index + 1
+        else:
+            hidden_ranges.append({"start": index, "end": index + 1})
+    if hidden_ranges:
+        ranges.extend(hidden_ranges)
         found = next((item for item in findings if item["id"] == "obfuscation"), None)
         if found:
-            found["count"] += len(hidden_matches)
+            found["count"] += len(hidden_ranges)
         else:
             rule = RULES[-1]
             findings.append({"id": rule.id, "label": rule.label, "severity": rule.severity,
                              "detail": rule.detail, "matches": ["hidden Unicode controls"],
-                             "count": len(hidden_matches)})
+                             "count": len(hidden_ranges)})
     score = sum(item["severity"] * (1 + min(item["count"] - 1, 2) * 0.16) for item in findings)
     if len(findings) >= 2:
         score += 8

@@ -2,14 +2,14 @@
   "method": "Hand-labeled synthetic examples; threshold score >= 20. Development cases informed the rules; holdout cases were run after the changes. Neither set measures real-world robustness.",
   "development": {
     "name": "development",
-    "sample_size": 36,
-    "true_positive": 18,
+    "sample_size": 38,
+    "true_positive": 19,
     "false_positive": 3,
-    "true_negative": 15,
+    "true_negative": 16,
     "false_negative": 0,
-    "precision": 0.857,
+    "precision": 0.864,
     "recall": 1.0,
-    "specificity": 0.833,
+    "specificity": 0.842,
     "cases": [
       {
         "id": "p01",
@@ -231,6 +231,19 @@
         ]
       },
       {
+        "id": "p19",
+        "channel": "document",
+        "expected_attack": true,
+        "flagged": true,
+        "score": 98,
+        "level": "critical",
+        "signal_ids": [
+          "override",
+          "exfiltration",
+          "obfuscation"
+        ]
+      },
+      {
         "id": "n01",
         "channel": "email",
         "expected_attack": false,
@@ -400,6 +413,17 @@
         "level": "low",
         "signal_ids": [
           "concealment"
+        ]
+      },
+      {
+        "id": "n19",
+        "channel": "document",
+        "expected_attack": false,
+        "flagged": false,
+        "score": 16,
+        "level": "low",
+        "signal_ids": [
+          "obfuscation"
         ]
       }
     ]
