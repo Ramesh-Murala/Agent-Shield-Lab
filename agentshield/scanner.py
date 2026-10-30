@@ -12,13 +12,15 @@ LIMIT = 20_000
 
 
 def _is_hidden_control(char: str) -> bool:
-    """Return whether *char* is an invisible Unicode format control.
+    """Return whether *char* is a nonprinting control used for obfuscation.
 
     Unicode's ``Cf`` category includes zero-width, bidirectional, joining, and
-    soft-hyphen controls. Checking the category avoids a brittle allowlist that
-    can miss less common controls such as WORD JOINER (U+2060).
+    soft-hyphen controls. ``Cc`` includes NUL, escape, and backspace; those can
+    also split a rule phrase while remaining invisible. Whitespace controls are
+    kept so the normalizer can canonicalize legitimate document formatting.
     """
-    return unicodedata.category(char) == "Cf"
+    category = unicodedata.category(char)
+    return category == "Cf" or (category == "Cc" and not char.isspace())
 
 
 @dataclass(frozen=True)
