@@ -10,17 +10,33 @@ from typing import Any
 
 LIMIT = 20_000
 
+_DEFAULT_IGNORABLE_MARK_RANGES = (
+    (0x034F, 0x034F),  # combining grapheme joiner
+    (0x180B, 0x180D),  # Mongolian free variation selectors
+    (0x180F, 0x180F),
+    (0xFE00, 0xFE0F),  # variation selectors
+    (0xE0100, 0xE01EF),  # supplementary variation selectors
+)
+
+
+def _is_default_ignorable_mark(char: str) -> bool:
+    codepoint = ord(char)
+    return any(start <= codepoint <= end for start, end in _DEFAULT_IGNORABLE_MARK_RANGES)
+
 
 def _is_hidden_control(char: str) -> bool:
     """Return whether *char* is a nonprinting control used for obfuscation.
 
     Unicode's ``Cf`` category includes zero-width, bidirectional, joining, and
     soft-hyphen controls. ``Cc`` includes NUL, escape, and backspace; those can
-    also split a rule phrase while remaining invisible. Whitespace controls are
-    kept so the normalizer can canonicalize legitimate document formatting.
+    also split a rule phrase while remaining invisible. Several default-
+    ignorable marks live in ``Mn`` instead, including the combining grapheme
+    joiner and variation selectors. Whitespace controls are kept so the
+    normalizer can canonicalize legitimate document formatting.
     """
     category = unicodedata.category(char)
-    return category == "Cf" or (category == "Cc" and not char.isspace())
+    return (category == "Cf" or (category == "Cc" and not char.isspace())
+            or _is_default_ignorable_mark(char))
 
 
 @dataclass(frozen=True)
@@ -132,7 +148,7 @@ def scan_text(raw_text: str) -> dict[str, Any]:
         else:
             rule = RULES[-1]
             findings.append({"id": rule.id, "label": rule.label, "severity": rule.severity,
-                             "detail": rule.detail, "matches": ["hidden Unicode controls"],
+                             "detail": rule.detail, "matches": ["hidden Unicode controls or marks"],
                              "count": len(hidden_ranges)})
     score = sum(item["severity"] * (1 + min(item["count"] - 1, 2) * 0.16) for item in findings)
     if len(findings) >= 2:
