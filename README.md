@@ -70,7 +70,7 @@ The JSON response contains `score`, `level`, `findings` with evidence spans, `po
 ## Design boundaries
 
 - Detection is an additional signal. Separate trusted instructions from retrieved content, restrict tool permissions, and require human approval for consequential actions even when the scanner reports low risk.
-- A `pass` verdict means **no rule matched**, not that the text is safe. The gate withholds all flagged or truncated text; callers decide how review works.
+- A `pass` verdict means **the score is below the review threshold**, not that no rule matched or that the text is safe. The gate withholds all flagged or truncated text; callers decide how review works.
 - The first 20,000 characters are scanned. `gate_untrusted_content` quarantines longer inputs rather than forwarding unscanned text.
 - The public gallery consists of recorded Python outputs, and does not accept arbitrary input. Run the Python server locally to use the form or API.
 
