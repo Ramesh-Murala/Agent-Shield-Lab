@@ -12,4 +12,4 @@ def gate_untrusted_content(text: str) -> dict:
         return {"decision": "review", "content": None, "report": report,
                 "reason": "Review detected signals before forwarding"}
     return {"decision": "pass", "content": report["text"], "report": report,
-            "reason": "No rule matched; maintain independent tool permissions"}
+            "reason": "Score below review threshold; maintain independent tool permissions"}
