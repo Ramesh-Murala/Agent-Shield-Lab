@@ -76,7 +76,7 @@ def render(text: str, *, example: str | None = None, static: bool = False) -> st
         "{{ANGLE}}": str(score * 3.6),
         "{{COLOR}}": palette[report["level"]],
         "{{VERDICT}}": verdict[report["level"]],
-        "{{VERDICT_COPY}}": "Review this input before forwarding it to an agent." if report["level"] != "low" else "No rule matched. A missed attack is still possible.",
+        "{{VERDICT_COPY}}": "Review this input before forwarding it to an agent." if report["level"] != "low" else "Score below the review threshold. A missed attack is still possible.",
         "{{SIGNALS}}": signals,
         "{{EVIDENCE}}": highlight(report),
         "{{POLICY}}": policy,
