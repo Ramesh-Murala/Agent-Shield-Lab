@@ -17,9 +17,19 @@ def test_web_form_and_api_share_python_scanner():
 
 
 def test_safe_example_and_request_limits():
-    assert "No rule matched" in client.get("/?example=safe").text
+    assert "Score below the review threshold" in client.get("/?example=safe").text
     assert client.post("/scan", data={"text": ""}).status_code == 422
     assert client.post("/api/scan", json={"text": "a" * 100_001}).status_code == 422
+
+
+def test_low_score_page_does_not_deny_visible_findings():
+    payload = "This tutorial discusses base64 encoding."
+    report = client.post("/api/scan", json={"text": payload}).json()
+    assert report["findings"] and report["level"] == "low"
+
+    response = client.post("/scan", data={"text": payload})
+    assert "Score below the review threshold" in response.text
+    assert "No rule matched." not in response.text
 
 
 def test_html_is_escaped():
