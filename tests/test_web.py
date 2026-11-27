@@ -29,6 +29,8 @@ def test_low_score_page_does_not_deny_visible_findings():
 
     response = client.post("/scan", data={"text": payload})
     assert "Score below the review threshold" in response.text
+    assert "Below review threshold" in response.text
+    assert "No rule matched" not in response.text
     assert "No rule matched." not in response.text
 
 

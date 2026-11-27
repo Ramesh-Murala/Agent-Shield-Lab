@@ -53,7 +53,7 @@ def render(text: str, *, example: str | None = None, static: bool = False) -> st
         notice = "Python engine · Server processing"
         intro = "Paste an email, document, or tool result. Inspect matched rules and an advisory plan. Submitted text is processed by this server."
     palette = {"critical": "#b42345", "high": "#bc4636", "caution": "#a36400", "low": "#258063"}
-    verdict = {"critical": "Critical injection", "high": "High risk", "caution": "Review advised", "low": "No rule matched"}
+    verdict = {"critical": "Critical injection", "high": "High risk", "caution": "Review advised", "low": "Below review threshold"}
     signals = "".join(
         '<div class="signal"><span class="signal-bar"></span><div>'
         f'<h4>{escape(item["label"])}</h4><p>{escape(item["detail"])} · {item["count"]} hit(s)</p></div>'
